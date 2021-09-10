@@ -27,7 +27,21 @@ router.delete('/:id',(req,res)=>{
     const {id} = req.params;
     const findUser = users.find((user)=>user.id == id);
     users = users.filter((user)=> user.id !=id);
-
     res.send(`User with the name ${findUser.name} and id ${id} deleted`);
+});
+
+router.patch('/:id',(req,res)=>{
+    const {id} = req.params;
+    const {name,age} = req.body;
+    const userUpdated = users.find((user)=>user.id == id);
+    if(name){
+        userUpdated.name = name;
+        res.send(`Name Updated for id number ${id}`);
+    }
+    if(age){
+        userUpdated.age = age;
+        res.send(`Age Updated for id number ${id}`);
+    }
+
 })
 export default router;
