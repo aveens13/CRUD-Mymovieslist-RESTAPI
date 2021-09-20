@@ -34,6 +34,7 @@ app.use('/products',productRoutes);
 //Get Requests
 app.get('/',(req,res)=>{res.render('index');})
 
+app.get('/add-movie',(req,res)=>{res.render('add-movie');})
 
 //Listening to server
 app.listen(PORT,()=>{
