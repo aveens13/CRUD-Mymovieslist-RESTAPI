@@ -36,6 +36,8 @@ app.get('/',(req,res)=>{res.render('index');})
 
 app.get('/add-movie',(req,res)=>{res.render('add-movie');})
 
+app.get('/update-movie',(req,res)=>{res.render('update-movie');})
+
 //Listening to server
 app.listen(PORT,()=>{
     console.log(`Listening on server http://localhost:${PORT}`);
