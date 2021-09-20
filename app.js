@@ -4,10 +4,11 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv'
 import userRoutes from './Routes/users.js';
 import productRoutes from './Routes/products.js';
+import moviesRoutes from './Routes/movies.js';
 import morgan from 'morgan'
 import path from 'path'
 const __dirname = path.resolve();
-
+import connectDB from './connection.js';
 // Making express call and port 
 const app =express();
 dotenv.config({path:'.env'});
@@ -15,6 +16,7 @@ const PORT= process.env.PORT || 5000;
 
 //Requests
 app.use(morgan('tiny'));
+connectDB();
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json()); // we will be using json data
 
@@ -30,13 +32,7 @@ app.use('/js',express.static(path.resolve(__dirname,"assets/js")))
 //Routing
 app.use('/users',userRoutes);
 app.use('/products',productRoutes);
-
-//Get Requests
-app.get('/',(req,res)=>{res.render('index');})
-
-app.get('/add-movie',(req,res)=>{res.render('add-movie');})
-
-app.get('/update-movie',(req,res)=>{res.render('update-movie');})
+app.use('/',moviesRoutes);
 
 //Listening to server
 app.listen(PORT,()=>{
