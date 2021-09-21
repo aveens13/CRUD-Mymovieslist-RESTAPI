@@ -3,7 +3,7 @@ import {homeroute,add_movie,update_movie} from './render.js';
 const router = express.Router();
 import moviedb from "../model/model.js";
 
-router.get('/mymovies',homeroute)
+router.get('/',homeroute)
 
 router.get('/add-movie',add_movie)
 
@@ -33,13 +33,32 @@ router.post('/api/movie',(req,res)=>{
 }
 )
 router.get('/api/movie',(req,res)=>{
-    moviedb.find()
-    .then(user=>{
-        res.send(user)
-    })
-    .catch(err=>{
-        res.status(500).send({message:err.message || "Error"})
-    })
+    //Getting specific movie
+    if(req.query.id){
+        const id = req.query.id
+        moviedb.findById(id)
+        .then(data=>{
+            if(!data){
+                res.status(404).send({message:`No movie with id ${id}`})
+            }
+            else{
+                res.send(data)
+            }
+        })
+        .catch(err=>{
+            res.status(500).send({message:"error with"+id})
+        })
+    }
+    //getting all movies
+    else{
+        moviedb.find()
+        .then(movie=>{
+            res.send(movie)
+        })
+        .catch(err=>{
+            res.status(500).send({message:err.message || "Error"})
+        })
+    }
 })
 router.put('/api/movie/:id',(req,res)=>{
     if(!req.body){
@@ -58,7 +77,7 @@ router.put('/api/movie/:id',(req,res)=>{
         }
     })
     .catch(err=>{
-        res.send({message:"Error"})
+        res.send({message:`Error ${err}`})
     })
 })
 router.delete('/api/movie/:id',(req,res)=>{
@@ -73,7 +92,7 @@ router.delete('/api/movie/:id',(req,res)=>{
      }
  })
  .catch(err=>{
-     res.status(400).send(`Could not delete user with id ${id}`);
+     res.status(400).send(`Could not delete movie with id ${id}`);
  })
 })
 
