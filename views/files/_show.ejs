@@ -1,9 +1,10 @@
+<%for(let i=0; i< movies.length;i++){%>
 <tr>
-    <td>1</td>
-    <td>Inception</td>
-    <td>9.4</td>
-    <td>Suspense/Thriller</td>
-    <td>Yes</td>
+    <td><%= i+1 %></td>
+    <td><%= movies[i].name %></td>
+    <td><%= movies[i].rating %></td>
+    <td><%= movies[i].genre %></td>
+    <td><%= movies[i].recommend %></td>
     <td>
         <a href="/update-movie" class="btn border-shadow update">
             <span class="text-gradient"><i class="far fa-edit"></i></span>
@@ -13,3 +14,4 @@
         </a>
     </td>
 </tr>
+<%}%>

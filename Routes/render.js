@@ -1,5 +1,11 @@
+import axios from "axios";
+
 export const homeroute=(req,res)=>{
-    res.render('index');
+    axios.get('http://localhost:3000/api/movie')
+        .then(function(response){
+            // console.log(response.data);
+            res.render('index',{movies:response.data});  
+        })
 }
 
 export const add_movie=(req,res)=>{res.render('add-movie');}
