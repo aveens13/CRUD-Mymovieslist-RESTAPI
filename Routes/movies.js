@@ -23,7 +23,8 @@ router.post('/api/movie',(req,res)=>{
     movie
         .save(movie)
         .then(data=>{
-            res.send(data)
+            // res.send(data)
+            res.redirect('/')
         })
         .catch(err=>{
             res.status(500).send({

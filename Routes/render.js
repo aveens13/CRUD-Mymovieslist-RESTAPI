@@ -3,7 +3,7 @@ import axios from "axios";
 export const homeroute=(req,res)=>{
     axios.get('http://localhost:3000/api/movie')
         .then(function(response){
-            // console.log(response.data);
+            console.log(response.data);
             res.render('index',{movies:response.data});  
         })
 }
