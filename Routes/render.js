@@ -10,4 +10,13 @@ export const homeroute=(req,res)=>{
 
 export const add_movie=(req,res)=>{res.render('add-movie');}
 
-export const update_movie=(req,res)=>{res.render('update-movie');}
+export const update_movie=(req,res)=>{
+    axios.get('http://localhost:3000/api/movie',{params:{id:req.query.id}})
+    .then(function(response){
+        console.log(response.data.name);
+        res.render('update-movie',{movie:response.data});
+    })
+    .catch(err=>{
+        res.send({message:`Error while doing the operation`});
+    })
+}

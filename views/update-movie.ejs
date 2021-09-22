@@ -13,16 +13,16 @@
             <h2 class="text-dark">Update the details</h2>
             <span class="text-light">Update the necessary fields</span>
         </div>
-        <form action="/" method="POST" id="update_user">
+        <form method="POST" id="update_user">
             <div class="new_user">
                 <div class="form-group">
                     <label for="name" class="text-light">Name</label>
-                    <input type="hidden" name="id" value="">
-                    <input type="text" name="name" value="" placeholder="Inception">
+                    <input type="hidden" name="id" value="<%= movie._id%>">
+                    <input type="text" name="name" value="<%= movie.name %>" placeholder="Inception">
                 </div>
                 <div class="form-group">
                     <label for="Rating" class="text-light">Rating</label>
-                    <input type="text" name="rating" value="" placeholder="10">
+                    <input type="text" name="rating" value="<%= movie.rating%>" placeholder="10">
                 </div>
                 <div class="form-group">
                     <label for="Genre" class="text-light">Genre</label>
